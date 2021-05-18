@@ -11,12 +11,16 @@ from datetime import datetime
 import sys
 import os
 
+# hide secrets
+from dotenv import dotenv_values
+config = dotenv_values(".env")
+
 # postgres init
 conn = psycopg2.connect(
     database="postgres",
-    user="postgres",
-    password="24062001",
-    host="coin-prices.cr8uycnutjeo.us-east-2.rds.amazonaws.com",
+    user=config.DB_USER,
+    password=config.DB_PASSWORD,
+    host=config.DB_HOST,
     port='5432'
 )
 cur = conn.cursor()
